@@ -1,0 +1,54 @@
+version: "3.9"
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: rl_redis
+    ports:
+      - "6380:6379"
+    networks:
+      - gateway_net
+
+  backend-1:
+    build: ./backend
+    container_name: rl_backend_1
+    environment:
+      - SERVER_NAME=backend-1
+    networks:
+      - gateway_net
+
+  backend-2:
+    build: ./backend
+    container_name: rl_backend_2
+    environment:
+      - SERVER_NAME=backend-2
+    networks:
+      - gateway_net
+
+  backend-3:
+    build: ./backend
+    container_name: rl_backend_3
+    environment:
+      - SERVER_NAME=backend-3
+    networks:
+      - gateway_net
+
+  gateway:
+    build: ./gateway
+    container_name: rl_gateway
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - backend-1
+      - backend-2
+      - backend-3
+    environment:
+      - REDIS_HOST=redis
+      - BACKEND_URLS=http://backend-1:8080,http://backend-2:8080,http://backend-3:8080
+    networks:
+      - gateway_net
+
+networks:
+  gateway_net:
+    driver: bridge
