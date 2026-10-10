@@ -12,3 +12,5 @@ HEALTH_CHECK_INTERVAL_SECONDS = float(os.environ.get("HEALTH_CHECK_INTERVAL_SECO
 
 # How long (seconds) to wait for a backend to respond before considering it dead
 HEALTH_CHECK_TIMEOUT_SECONDS = float(os.environ.get("HEALTH_CHECK_TIMEOUT_SECONDS", 2))
+RATE_LIMIT_REQUEST=int(os.environ.get("RATE_LIMIT_REQUEST", 10))
+RATE_LIMIT_WINDOW_SECONDS=int(os.environ.get("RATE_LIMIT_WINDOW_SECONDS", 10))
