@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "search.exclude": {
     "**/.sst": true
   },
@@ -22,7 +21,3 @@
     "runOn": "folderOpen"
   }
 }
-=======
-    "python-envs.defaultEnvManager": "ms-python.python:system"
-}
->>>>>>> eb14e90 (Add fixed-window rate limiting)
